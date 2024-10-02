@@ -1,0 +1,105 @@
+Metadata-Version: 2.1
+Name: gpol
+Version: 1.0.0
+Summary: General Purpose Optimization Library (GPOL): a flexible and efficient multi-purpose optimization library in Python.
+Home-page: 
+Download-URL: https://gitlab.com/ibakurov/general-purpose-optimization-library
+Author: Illya Bakurov
+Author-email: ibakurov@isegi.unl.pt
+License: MIT
+Keywords: GPOL,Optimization
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# (Towards a) General-Purpose Optimization Library (GPOL)
+
+A flexible and efficient multi-purpose optimization library in Python.
+
+Several interesting libraries for optimization were proposed so far. Some focus on
+a given optimization algorithm (or a limited set of them), others on a limited set
+of problems. Frequently, their implementation does not follow precisely the formal 
+algorithmic definition, they are not easy to personalize and difficult to compare between 
+each other. This makes it difficult to perform comparative studies and propose novel
+approaches. To solve these issues, we propose the General-Purpose Optimization Library 
+(GPOL): a flexible and efficient multi-purpose optimization
+library that allows one to carry the computations on both CPU or GPU, and using full batch 
+or mini-batch learning. With GPOL we aim to offer both the scientific community and the 
+practitioners a more unified optimization environment. This (first) version of GPOL implements 
+several iterative-search algorithms, namely Random Search, Hill Climbing, Simulated Annealing, 
+Semantic Hill Climbing, Semantic Simulated Annealing, Genetic Algorithms, Genetic Programming, 
+Geometric Semantic Genetic Programming, Differential Evolution and Particle Swarm Optimization (both
+its synchronous and asynchronous variants). The library supports algorithms' application
+to several different types of OP, among which continuous and combinatorial OPs and supervised machine 
+learning (approached from the perspective of inductive programming, and exploiting batch-training). 
+Additionally, the library implements popular benchmark problems: knapsack, travelling salesman, and 
+13 popular synthetic mathematical functions. All data structures are internally represented with 
+PyTorch tensors, which can exploit GPU parallelism during their manipulation. This is particularly
+useful when solving supervised machine learning problems with large amounts of data. GPOL is also 
+designed to be easily extended by its users. Leveraging on the library's flexible design and modularity, researchers are 
+in fact able to implement their own class of problems in GPOL, and by following some simple guidelines in terms 
+of methods and signatures, they can explore the problem's search space with any of the current and future implemented 
+ISAs. Similarly, the same modularity nature of the library makes it possible for the users to expand on the current set 
+of optimization algorithms, by modifying existing ones, adding new operators or implementing completely new ones.
+
+The package was developed in Python version 3.8.5.
+
+## Installing
+
+After cloning the repository, navigate to the project root and use the package manager [pip](https://pip.pypa.io/en/stable/) to install `gpol` from the local source:
+
+```bash
+pip install .
+```
+The requirements are automatically handled when installing the library, and include the following packages:
+```
+appdirs==1.4.4
+filelock==3.0.12
+joblib==1.0.0
+numpy==1.19.1
+pandas==1.1.5
+scipy==1.6.0
+```
+
+[PyTorch](https://pytorch.org/) (v1.7.1) is another requirement for `gpol`, however, given the fact that the installation 
+instructions vary on different operation systems, availability of GPU and version of the CUDA drivers, it must be 
+installed manually, by choosing the appropriate configuration 
+from [INSTALLING PREVIOUS VERSIONS OF PYTORCH](https://pytorch.org/get-started/previous-versions/). In other words, after 
+installing `gpol` from the local source (along with the respective requirements), install PyTorch in the 
+underlying virtual environment by running the appropriate command for the version v1.7.1. found 
+in [INSTALLING PREVIOUS VERSIONS OF PYTORCH](https://pytorch.org/get-started/previous-versions/). 
+Since the available commands also install `torchvision` and `torchaudio`, which are not necessary for `gpol`,
+these can be removed from the command.  
+
+For the sake of simplicity, consider the following installation commands for conda:
+```
+# OSX
+conda install pytorch==1.7.1 -c pytorch
+# Linux and Windows
+## CUDA 9.2
+conda install pytorch==1.7.1 cudatoolkit=9.2 -c pytorch
+## CUDA 10.1
+conda install pytorch==1.7.1 -c pytorch
+## CUDA 10.2
+conda install pytorch==1.7.1 cudatoolkit=10.2 -c pytorch
+## CUDA 11.0
+conda install pytorch==1.7.1 cudatoolkit=11.0 -c pytorch
+## CPU only
+conda install pytorch==1.7.1 cpuonly -c pytorch
+```   
+
+## Usage
+After the installation, the library can be accessed from any python script as ```gpol```.
+
+The `main` folder contains several demo and benchmark scripts (end/end integration test). The `tutorials_jupyter` folder 
+contains detailed step-by-step tutorials of how to use GPOL to solve different problems.
+
+
+## Uninstalling
+
+```bash
+pip uninstall gpol
+```
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
